@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: User fills out the form and clicks save
+
+    browser->browser: User input data
+    browser->>server: POST /new_note_spa
+    activate server
+    server-->>server: Save new note data
+    server-->>browser: Confirmation of data saved
+    deactivate server
+
+    Note right of browser: Browser updates the local data and redraws notes
+
+    Note right of browser: (Assuming a redrawNotes() function is present)
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: Updated note data
+    deactivate server
+
+    Note right of browser: The browser executes the callback function that re-renders the notes
